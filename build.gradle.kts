@@ -47,8 +47,11 @@ signing {
 }
 
 publishOnCentral {
-    projectLongName.set("Colletivize Kotlin stdlib")
-    projectDescription.set("Creates the fileded version of each methods in the Kotlin stdlib")
+    projectUrl = "https://github.com/Collektive/${rootProject.name}"
+    projectLongName = "collektivize"
+    projectDescription = "Creates the fileded version of each methods in the Kotlin stdlib"
+    licenseName = "Apache License 2.0"
+    licenseUrl = "https://opensource.org/license/Apache-2.0/"
     publishing {
         publications {
             withType<MavenPublication> {
