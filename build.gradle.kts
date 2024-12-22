@@ -15,8 +15,13 @@ repositories {
 }
 
 dependencies {
+    implementation(libs.collektive)
+    implementation(libs.kotlin.reflect)
     implementation(libs.kotlin.stdlib)
+    implementation(libs.kotlinpoet)
     testImplementation(libs.bundles.kotlin.testing)
+    testImplementation(libs.bundles.collektive.test)
+    testImplementation(libs.slf4j)
 }
 
 kotlin {
