@@ -1,3 +1,26 @@
+## 1.0.0 (2024-12-22)
+
+### Features
+
+* collektivize kotlin stdlib ([a823c46](https://github.com/Collektive/collektivize/commit/a823c464f206149b1d4c3e6deabf35bcc12d1c39))
+
+### Build and continuous integration
+
+* fix name also in build job ([4268662](https://github.com/Collektive/collektivize/commit/4268662f435f26ce7f762426a2d9935732f025b6))
+* setup group id and project name ([3d88aee](https://github.com/Collektive/collektivize/commit/3d88aeeb27cc6e96c7334a0ccd46c971f1364c8b))
+* setup project dependncies ([f6a5959](https://github.com/Collektive/collektivize/commit/f6a59593bf540b0e1305479eac7e7852738969b9))
+* setup publishing metadata ([9734a82](https://github.com/Collektive/collektivize/commit/9734a826dcfc2c06f61e18efee7ca0a6b50d0bec))
+* update gpg keynames ([52c1890](https://github.com/Collektive/collektivize/commit/52c18901719077bba8d2d0db505f5afc53bb785a))
+* use collektive renovate config ([b465017](https://github.com/Collektive/collektivize/commit/b465017046503d039e004309ca87ba1db0ec49bb))
+
+### General maintenance
+
+* new editorconfig spec ([5a3c1b5](https://github.com/Collektive/collektivize/commit/5a3c1b573824230522a70be5d75c56fa465660a3))
+
+### Style improvements
+
+* reformat according to detekt ([0fb8c8b](https://github.com/Collektive/collektivize/commit/0fb8c8b93a287433f08fc97caabb163d80c20c68))
+
 ## [0.1.27](https://github.com/DanySK/Template-for-Kotlin-JVM-Projects/compare/0.1.26...0.1.27) (2024-12-16)
 
 ### Dependency updates
