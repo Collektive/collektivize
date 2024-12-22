@@ -5,6 +5,9 @@ import com.squareup.kotlinpoet.ParameterSpec
 import kotlin.reflect.KCallable
 import kotlin.reflect.KProperty
 
+/**
+ * Utilities for interoperate with kotlin poet.
+ */
 object KotlinPoetUtils {
     private fun KCallable<*>.isProperty() = this is KProperty<*>
 

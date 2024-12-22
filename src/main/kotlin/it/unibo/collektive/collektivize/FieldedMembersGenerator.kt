@@ -13,7 +13,13 @@ import kotlin.reflect.full.isSubtypeOf
 import kotlin.reflect.jvm.kotlinFunction
 import kotlin.reflect.typeOf
 
+/**
+ * Utilities for fielded members.
+ */
 object FieldedMembersGenerator {
+    /**
+     * Base classes to inspect.
+     */
     val baseExtensions =
         sequenceOf(
             "Arrays",
@@ -159,6 +165,7 @@ object FieldedMembersGenerator {
     /**
      * Generates field-based functions for the given types.
      */
+    @Suppress("CyclomaticComplexMethod")
     fun generateFieldFunctionsForTypes(
         types: Sequence<KClass<*>>,
         packageName: String = "it.unibo.collektive.stdlib",
@@ -255,15 +262,4 @@ object FieldedMembersGenerator {
                 }
         }
     }
-//
-//    @JvmStatic
-//    fun main(args: Array<String>) {
-//        val outputDir = if (args.isEmpty()) null else args[0]
-//        generateFieldFunctionsForTypes(baseTargetTypes).forEach { source ->
-//            when {
-//                outputDir == null -> println(source)
-//                else -> source.writeTo(File(outputDir))
-//            }
-//        }
-//    }
 }

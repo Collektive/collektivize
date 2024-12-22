@@ -15,6 +15,9 @@ import kotlin.reflect.KTypeParameter
 import kotlin.reflect.KTypeProjection
 import kotlin.reflect.KVariance
 
+/**
+ * Utilities for interoperate with [KType].
+ */
 object KTypeUtils {
     /**
      * Given a type, returns a list of all generic types defined in it recursively.
@@ -28,7 +31,7 @@ object KTypeUtils {
      * the variance of the type variables is not considered since kotlin does not allow variance
      * in type variables for functions.
      */
-    fun TypeName.getAllTypeVariables(): List<TypeVariableName> =
+    internal fun TypeName.getAllTypeVariables(): List<TypeVariableName> =
         when (this) {
             is TypeVariableName -> listOf(TypeVariableName(this.name, this.bounds, null))
             is ParameterizedTypeName -> typeArguments.flatMap { it.getAllTypeVariables() }
@@ -43,7 +46,9 @@ object KTypeUtils {
             KVariance.OUT -> KModifier.OUT
         }
 
-    fun KTypeParameter.toTypeVariableName(recurryingTypeArguments: Set<KTypeParameter> = emptySet()): TypeVariableName =
+    internal fun KTypeParameter.toTypeVariableName(
+        recurryingTypeArguments: Set<KTypeParameter> = emptySet(),
+    ): TypeVariableName =
         when {
             this in recurryingTypeArguments ->
                 TypeVariableName(
@@ -65,7 +70,7 @@ object KTypeUtils {
             }
         }
 
-    fun KTypeProjection.toTypeNameWithRecurringGenericSupport(
+    internal fun KTypeProjection.toTypeNameWithRecurringGenericSupport(
         recurringTypeArguments: Set<KTypeParameter> = emptySet(),
     ): TypeName =
         when (val result = type.toTypeNameWithRecurringGenericSupport(recurringTypeArguments)) {
@@ -90,7 +95,7 @@ object KTypeUtils {
             else -> this
         }
 
-    fun KType?.toTypeNameWithRecurringGenericSupport(
+    internal fun KType?.toTypeNameWithRecurringGenericSupport(
         recurringTypeArguments: Set<KTypeParameter> = emptySet(),
     ): TypeName {
         if (this == null) {

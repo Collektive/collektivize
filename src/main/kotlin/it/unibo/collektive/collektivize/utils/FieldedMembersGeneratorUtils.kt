@@ -34,7 +34,7 @@ internal val operatorNotReturningField = listOf("compareTo", "contains")
 
 internal fun ParameterSpec.isField() = type.toString().contains("Field")
 
-val specializedArrayTypes =
+internal val specializedArrayTypes =
     setOf(
         IntArray::class,
         DoubleArray::class,
@@ -110,7 +110,8 @@ internal fun generateFunction(
                     }
                 }
             }
-            // Add type variables to the function definition by recursively getting all type variables from the parameters
+            // Add type variables to the function definition by recursively getting all type variables
+            // from the parameters
             // The .toSet() call is to remove duplicates
             val declaredTypeVariables = callable.typeParameters.map { it.toTypeVariableName() }
             addTypeVariables(declaredTypeVariables)
@@ -215,7 +216,7 @@ internal fun generatePrimitivesFile(
         }.build()
 }
 
-val autoConversions =
+internal val autoConversions =
     mapOf(
         "java.lang.Appendable" to "kotlin.text.Appendable",
         "java.util.Comparator" to "kotlin.Comparator",
