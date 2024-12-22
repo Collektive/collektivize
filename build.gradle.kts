@@ -1,4 +1,3 @@
-@Suppress("DSL_SCOPE_VIOLATION")
 plugins {
     alias(libs.plugins.dokka)
     alias(libs.plugins.gitSemVer)
@@ -9,7 +8,7 @@ plugins {
     alias(libs.plugins.taskTree)
 }
 
-group = "org.danilopianini"
+group = "it.unibo.collektive"
 
 repositories {
     mavenCentral()
@@ -48,21 +47,22 @@ signing {
 }
 
 publishOnCentral {
-    projectLongName.set("Template Kotlin JVM Project")
-    projectDescription.set("A template repository for Kotlin JVM projects")
-    repository("https://maven.pkg.github.com/danysk/${rootProject.name}".lowercase()) {
-        user.set("DanySK")
-        password.set(System.getenv("GITHUB_TOKEN"))
-    }
+    projectLongName.set("Colletivize Kotlin stdlib")
+    projectDescription.set("Creates the fileded version of each methods in the Kotlin stdlib")
     publishing {
         publications {
             withType<MavenPublication> {
                 pom {
                     developers {
                         developer {
-                            name.set("Danilo Pianini")
-                            email.set("danilo.pianini@gmail.com")
-                            url.set("http://www.danilopianini.org/")
+                            name = "Nicolas Farabegoli"
+                            email = "nicolas.farabegoli@gmail.com"
+                            url = "https://nicolasfarabegoli.it"
+                        }
+                        developer {
+                            name = "Danilo Pianini"
+                            email = "danilo.pianini@gmail.com"
+                            url = "http://www.danilopianini.org/"
                         }
                     }
                 }
