@@ -2,7 +2,7 @@
 collektive = "11.1.3"
 kotest = "5.9.1"
 kotlin = "2.1.0"
-mockito = "5.14.2"
+mockito = "5.15.2"
 
 [libraries]
 collektive = { module = "it.unibo.collektive:dsl", version.ref = "collektive" }
