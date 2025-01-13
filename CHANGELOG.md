@@ -1,3 +1,25 @@
+## [1.0.1](https://github.com/Collektive/collektivize/compare/1.0.0...1.0.1) (2025-01-13)
+
+### Dependency updates
+
+* **core-deps:** bump to collektive 12 ([a37793e](https://github.com/Collektive/collektivize/commit/a37793e47a002f637624d0e248fdc74c58ce5c02))
+* **deps:** update dependency org.mockito:mockito-core to v5.15.2 ([#8](https://github.com/Collektive/collektivize/issues/8)) ([bc86fcf](https://github.com/Collektive/collektivize/commit/bc86fcf2cf1790d015f702255cb1f5bb323630d2))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.117 ([#2](https://github.com/Collektive/collektivize/issues/2)) ([4729885](https://github.com/Collektive/collektivize/commit/4729885f68d46936d51df891c76845f38c6253d1))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.118 ([#11](https://github.com/Collektive/collektivize/issues/11)) ([d88847b](https://github.com/Collektive/collektivize/commit/d88847b2f9fb899c4ef840153d2b7b9730cadefc))
+* **deps:** update dependency semantic-release-preconfigured-conventional-commits to v1.1.119 ([#13](https://github.com/Collektive/collektivize/issues/13)) ([5d7ba9c](https://github.com/Collektive/collektivize/commit/5d7ba9ce118ace339cafff1c3e8ba5766cb8478d))
+* **deps:** update node.js to 22.13 ([#9](https://github.com/Collektive/collektivize/issues/9)) ([ab6691c](https://github.com/Collektive/collektivize/commit/ab6691cffd98b2e4efb5875400ed1a92452cc8c5))
+* **deps:** update plugin multijvmtesting to v3.0.3 ([#4](https://github.com/Collektive/collektivize/issues/4)) ([109e4c3](https://github.com/Collektive/collektivize/commit/109e4c38339400d5738ddef4076180ef30aa4496))
+* **deps:** update plugin multijvmtesting to v3.1.1 ([#5](https://github.com/Collektive/collektivize/issues/5)) ([b6d74a7](https://github.com/Collektive/collektivize/commit/b6d74a7c0ef9d4880307559d9c20f487535986d0))
+* **deps:** update plugin multijvmtesting to v3.1.2 ([#6](https://github.com/Collektive/collektivize/issues/6)) ([d422c19](https://github.com/Collektive/collektivize/commit/d422c191f8bf66678d9c4c4f01a9878310632358))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.0 ([#12](https://github.com/Collektive/collektivize/issues/12)) ([05ba62e](https://github.com/Collektive/collektivize/commit/05ba62e85ce2b052755d1fc77303fd894c2f0b2d))
+
+### Style improvements
+
+* reformat style ([15cfab0](https://github.com/Collektive/collektivize/commit/15cfab0edd9e2c96f7a931522400eb87059dd9c6))
+
 ## 1.0.0 (2024-12-22)
 
 ### Features
