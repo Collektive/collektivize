@@ -23,6 +23,8 @@ import kotlin.reflect.KCallable
 import kotlin.reflect.KClass
 import kotlin.reflect.KFunction
 import kotlin.reflect.KParameter
+import kotlin.reflect.full.isSupertypeOf
+import kotlin.reflect.typeOf
 
 internal val FIELD_INTERFACE = Field::class.asClassName()
 internal val FIELD_COMPANION = Field.Companion::class.asClassName()
@@ -51,7 +53,7 @@ internal val specializedArrayTypes =
  * replaced by a `Field` of the same type.
  * The function drop the first combination where all parameters are not `Field`.
  */
-internal fun parameterCombinations(parameters: List<ParameterSpec>): List<List<ParameterSpec>> {
+internal fun parameterCombinations(origin: KCallable<*>): List<List<ParameterSpec>> {
     fun decimalToBinaryArray(
         decimal: Int,
         size: Int,
@@ -59,23 +61,62 @@ internal fun parameterCombinations(parameters: List<ParameterSpec>): List<List<P
         require(size <= Int.SIZE_BITS) { "Size must be less than or equal to ${Int.SIZE_BITS}" }
         return (0..Int.SIZE_BITS).take(size).map { (decimal shr it) and 1 == 1 }
     }
+    val parameters = origin.parameters
+    val parametersSize = parameters.size
+    val combinationMap =
+        (1 until 2.0.pow(parametersSize).toInt()).associateWith { i ->
+            decimalToBinaryArray(i, parametersSize)
+        }
 
-    val parametersSize = 2.0.pow(parameters.size).toInt()
-    val decimals = parameters.size
-    val combinationMap = (1 until parametersSize).associateWith { i -> decimalToBinaryArray(i, decimals) }
-
-    return combinationMap.map { (_, binaryArray) ->
-        parameters.zip(binaryArray).map { (parameter, isField) ->
-            when (isField) {
-                true ->
-                    ParameterSpec(
-                        parameter.name,
-                        FIELD_INTERFACE.parameterizedBy(ID_BOUNDED_TYPE, parameter.type),
-                    )
-
-                false -> parameter
+    return combinationMap
+        .map { (_, binaryArray) ->
+            parameters
+                .zip(binaryArray)
+                .map { (parameter, shouldBeFielded) ->
+                    when (shouldBeFielded) {
+                        true -> parameter.toFieldParameterSpec()
+                        false -> parameter.toParameterSpec(origin)
+                    }
+                }
+        }.mapNotNull { paramList ->
+            // excludes shadowed functions
+            when (paramList.any { it == null }) {
+                true -> null
+                false -> paramList.filterNotNull()
             }
         }
+}
+
+private fun KParameter.toParameterSpec(origin: KCallable<*>): ParameterSpec {
+    val typeName = type.toTypeNameWithRecurringGenericSupport()
+    return ParameterSpec(
+        name = name ?: "this",
+        type = typeName.copy(annotations = emptyList()),
+        modifiers =
+            when {
+                origin is KFunction<*> && origin.isInline && isFunctionType() ->
+                    listOf(KModifier.CROSSINLINE)
+                else -> emptyList()
+            },
+    )
+}
+
+/**
+ * Given a [KParameter], returns a [ParameterSpec] where the type is a [Field] of the same type as the parameter.
+ * Returns `null` if the "fielded" parameter would be shadowed.
+ */
+private fun KParameter.toFieldParameterSpec(): ParameterSpec? {
+    val willBeShadowed = type == typeOf<Field<*, *>>() || type.isSupertypeOf(typeOf<Field<*, *>>())
+    return when (willBeShadowed) {
+        true -> null // this parameter will be shadowed, do not generate it (will be removed later)
+        false ->
+            ParameterSpec(
+                name ?: "this",
+                FIELD_INTERFACE.parameterizedBy(
+                    ID_BOUNDED_TYPE,
+                    type.toTypeNameWithRecurringGenericSupport(),
+                ),
+            )
     }
 }
 
@@ -161,28 +202,21 @@ internal fun generateFunction(
 internal fun KParameter.isFunctionType(): Boolean =
     (type.classifier as? KClass<*>)
         ?.qualifiedName
-        ?.startsWith("kotlin.Function")
-        ?: false
+        ?.startsWith("kotlin.Function") == true
 
-internal fun generateFunctions(origin: KCallable<*>): List<FunSpec> {
-    val functionArguments: List<ParameterSpec> =
-        origin.parameters.map { parameter: KParameter ->
-            val typeName = parameter.type.toTypeNameWithRecurringGenericSupport()
-            ParameterSpec(
-                name = parameter.name ?: "this",
-                type = typeName.copy(annotations = emptyList()),
-                modifiers =
-                    when {
-                        origin is KFunction<*> && origin.isInline && parameter.isFunctionType() ->
-                            listOf(KModifier.CROSSINLINE)
-                        else -> emptyList()
-                    },
-            )
-        }
-    return parameterCombinations(functionArguments).map { paramList ->
-        generateFunction(origin, paramList)
-    }
-}
+/**
+ * This function generates all the possible functions for a given [origin] callable.
+ * The function will generate all the possible combinations of parameters where each parameter is replaced by a `Field`
+ * of the same type.
+ *
+ * This function will exclude functions that would be shadowed by the original function.
+ *
+ * For example: `fun String.plus(other: Any?): String` will not generate the function
+ * `fun String.plus(other: Field<ID, Any?>): Field<ID, String>` since it will be shadowed by the original version.
+ */
+internal fun generateFunctions(origin: KCallable<*>): List<FunSpec> =
+    parameterCombinations(origin)
+        .map { paramList -> generateFunction(origin, paramList) }
 
 internal fun generatePrimitivesFile(
     origin: List<KCallable<*>>,
