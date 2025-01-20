@@ -1,3 +1,9 @@
+## [1.0.5](https://github.com/Collektive/collektivize/compare/1.0.4...1.0.5) (2025-01-20)
+
+### Dependency updates
+
+* **core-deps:** update collektive to v12.3.0 ([#16](https://github.com/Collektive/collektivize/issues/16)) ([43e31d2](https://github.com/Collektive/collektivize/commit/43e31d2d28d2368ed9d96892684f371d7ca3d7b6))
+
 ## [1.0.4](https://github.com/Collektive/collektivize/compare/1.0.3...1.0.4) (2025-01-19)
 
 ### Dependency updates
