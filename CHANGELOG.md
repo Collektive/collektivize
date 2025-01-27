@@ -1,3 +1,21 @@
+## [1.0.6](https://github.com/Collektive/collektivize/compare/1.0.5...1.0.6) (2025-01-27)
+
+### Dependency updates
+
+* **core-deps:** update collektive to v12.3.1 ([#26](https://github.com/Collektive/collektivize/issues/26)) ([140b684](https://github.com/Collektive/collektivize/commit/140b6841360a3e7438d864fcc2d9c7910309ebc8))
+* **deps:** update dependency gradle to v8.12.1 ([#21](https://github.com/Collektive/collektivize/issues/21)) ([d78f115](https://github.com/Collektive/collektivize/commit/d78f11529becf6abe88b5123a3d1dcfe57df489b))
+* **deps:** update plugin com.gradle.develocity to v3.19.1 ([#18](https://github.com/Collektive/collektivize/issues/18)) ([d4c624d](https://github.com/Collektive/collektivize/commit/d4c624db89fa5f663cbc85e9db4b20d9f1918ce9))
+* **deps:** update plugin multijvmtesting to v3.2.0 ([#20](https://github.com/Collektive/collektivize/issues/20)) ([b04c307](https://github.com/Collektive/collektivize/commit/b04c3078051706c940f7900d3966b71fb0f3fbb3))
+* **deps:** update plugin multijvmtesting to v3.2.1 ([#22](https://github.com/Collektive/collektivize/issues/22)) ([356a342](https://github.com/Collektive/collektivize/commit/356a342a6e9762b9af99b9911cd9f3192b2151a1))
+* **deps:** update plugin org.danilopianini.gradle-pre-commit-git-hooks to v2.0.19 ([#23](https://github.com/Collektive/collektivize/issues/23)) ([05fcac8](https://github.com/Collektive/collektivize/commit/05fcac8de9f17687c912dfa9f3b6f45c9dc3c750))
+
+### Build and continuous integration
+
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.1 ([#17](https://github.com/Collektive/collektivize/issues/17)) ([838f146](https://github.com/Collektive/collektivize/commit/838f1464290b7303d42d87de98f76ed488214ab6))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.2 ([#19](https://github.com/Collektive/collektivize/issues/19)) ([797c068](https://github.com/Collektive/collektivize/commit/797c0684eb69884ee36ada6f40b1f61748705358))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.3 ([#24](https://github.com/Collektive/collektivize/issues/24)) ([32912fd](https://github.com/Collektive/collektivize/commit/32912fd81f0411f472a45af818bf0394444ae04d))
+* **deps:** update danysk/build-check-deploy-gradle-action action to v3.7.6 ([#25](https://github.com/Collektive/collektivize/issues/25)) ([1bcf93e](https://github.com/Collektive/collektivize/commit/1bcf93eee4fe66529e0cade01d9ce5ca495ffbc4))
+
 ## [1.0.5](https://github.com/Collektive/collektivize/compare/1.0.4...1.0.5) (2025-01-20)
 
 ### Dependency updates
